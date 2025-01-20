@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="6;url=https://example.com">
     <title>Fullscreen Video Player</title>
     <style>
         body, html {
@@ -105,6 +106,11 @@
                 startBtn.style.display = "block"; // Show button again
             }
         });
+    </script>
+    <script>
+  setTimeout(function() {
+    window.location.href = "https://example.com";
+  }, 6000); // 6000 milliseconds = 6 seconds
     </script>
 
 </body>
