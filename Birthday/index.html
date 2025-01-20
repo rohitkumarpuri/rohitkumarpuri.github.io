@@ -91,28 +91,31 @@ function updateCountdown() {
   const timeDiff = birthDate - now;
 
     // Logic to determine what text to show
-if (now.getMonth() === 6 && now.getDate() >= 1 && now.getDate() < 25) {
-  replaceHeaderText("Next Month is My Birthday");
-} else if (now.getMonth() === 7 && now.getDate() >= 1 && now.getDate() < 25) {
-  replaceHeaderText("This Month is My Birthday");
-} else if (now.getMonth() === 7 && now.getDate() >= 25 && now.getDate() < 28) {
-  replaceHeaderText("Next Week is My Birthday");
-} else if (now.getMonth() === 7 && now.getDate() >= 28 && now.getDate() < 1) {
-  replaceHeaderText("This Week is My Birthday");
-} else if (now.getMonth() === 7 && now.getDate() === 31) {
-  replaceHeaderText("Yesterday is My Birthday");
-} else if (now.getMonth() === 7 && now.getDate() === 1) {
-  // Hide countdown and age calculator on the birthday
+if (now.getMonth() === 9 && now.getDate() >= 1 && now.getDate() < 26) {  
+  // October 1 - October 25
+  replaceHeaderText("Next Month is My Birthday");  
+} else if (now.getMonth() === 10 && now.getDate() >= 1 && now.getDate() < 26) {  
+  // November 1 - November 25
+  replaceHeaderText("This Month is My Birthday");  
+} else if (now.getMonth() === 10 && now.getDate() >= 26 && now.getDate() < 30) {  
+  // November 26 - November 29
+  replaceHeaderText("This Week is My Birthday");  
+} else if (now.getMonth() === 10 && now.getDate() === 30) {  
+  // November 30
+  replaceHeaderText("Yesterday was My Birthday");  
+} else if (now.getMonth() === 10 && now.getDate() === 26) {  
+  // Hide countdown and age calculator on the birthday (November 26)
   clearInterval(countdownInterval);
   showBirthdayMessage();
-  return;
-} else if (now.getMonth() === 7 && now.getDate() > 1) {
-  replaceHeaderText("Countdown to My Birthday");
-  mainCountdownElement.style.display = 'none';
-  ageContainerElement.style.display = 'none';
-  return;
-} else {
-  replaceHeaderText("Countdown to My Birthday");
+  return;  
+} else if (now.getMonth() === 10 && now.getDate() > 26) {  
+  // After birthday (November 27 - 29)
+  replaceHeaderText("Countdown to My Birthday");  
+  mainCountdownElement.style.display = 'none';  
+  ageContainerElement.style.display = 'none';  
+  return;  
+} else {  
+  replaceHeaderText("Countdown to My Birthday");  
 }
 
   // Update countdown values
