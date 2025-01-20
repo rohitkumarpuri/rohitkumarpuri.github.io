@@ -49,9 +49,12 @@
             100% { box-shadow: 0 5px 15px rgba(255, 102, 0, 0.5); }
         }
 
-        /* Hide Video Tag Initially */
+        /* Hide Video Initially */
         video {
             display: none;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
         }
     </style>
 </head>
@@ -59,31 +62,47 @@
 
     <button id="startBtn">Let's Start</button>
 
-    <video id="video" controls autoplay>
+    <video id="video" controls>
         <source src="y2mate.com - GLOW VIDEO viral freefire trending alightmotion edit_720pFH.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 
     <script>
-        document.getElementById("startBtn").addEventListener("click", function() {
-            let video = document.getElementById("video");
-            this.style.display = "none"; // Hide button
+        let startBtn = document.getElementById("startBtn");
+        let video = document.getElementById("video");
+
+        startBtn.addEventListener("click", function() {
+            startBtn.style.display = "none"; // Hide button
             video.style.display = "block"; // Show video
-            video.requestFullscreen().catch(err => console.log(err)); // Go Fullscreen
-            video.play();
+
+            let playPromise = video.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    // Fullscreen mode
+                    if (video.requestFullscreen) {
+                        video.requestFullscreen();
+                    } else if (video.webkitRequestFullscreen) {
+                        video.webkitRequestFullscreen();
+                    } else if (video.msRequestFullscreen) {
+                        video.msRequestFullscreen();
+                    }
+                }).catch(error => {
+                    console.log("Error playing video: ", error);
+                });
+            }
         });
 
         // Redirect to Dashboard.html after video ends
-        document.getElementById("video").addEventListener("ended", function() {
+        video.addEventListener("ended", function() {
             window.location.href = "Dashboard.html";
         });
 
         // Hide video when user exits fullscreen
         document.addEventListener("fullscreenchange", function() {
-            let video = document.getElementById("video");
             if (!document.fullscreenElement) {
                 video.style.display = "none"; // Hide video
-                document.getElementById("startBtn").style.display = "block"; // Show button again
+                startBtn.style.display = "block"; // Show button again
             }
         });
     </script>
