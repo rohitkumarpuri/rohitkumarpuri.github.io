@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GIF Animation</title>
+    <title>GIF Animation with Sound</title>
     <style>
         body, html {
             margin: 0;
@@ -71,13 +71,23 @@
         <img src="y2mate.com - GLOW VIDEO viral freefire trending alightmotion edit_720pFH (online-video-cutter.com) (1) (1) (1).gif" alt="Loading Animation">
     </div>
 
+    <!-- Audio File -->
+    <audio id="startAudio">
+        <source src="your-audio-file.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
     <script>
         let startBtn = document.getElementById("startBtn");
         let gifContainer = document.getElementById("gifContainer");
+        let startAudio = document.getElementById("startAudio");
 
         startBtn.addEventListener("click", function() {
             startBtn.style.display = "none"; // Hide button
             gifContainer.style.display = "block"; // Show GIF
+            
+            // Play audio
+            startAudio.play();
 
             // Redirect after 6 seconds
             setTimeout(function() {
