@@ -16,7 +16,7 @@
             background: radial-gradient(circle, #1e1e1e, #000);
             font-family: Arial, sans-serif;
         }
-        
+
         /* Stylish Button */
         #startBtn {
             padding: 15px 40px;
@@ -29,8 +29,7 @@
             border-radius: 50px;
             box-shadow: 0 5px 15px rgba(255, 102, 0, 0.5);
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            animation: glow 2s infinite alternate;
         }
 
         /* Button Hover Effect */
@@ -44,32 +43,15 @@
             transform: scale(0.95);
         }
 
-        /* Button Glow Animation */
         @keyframes glow {
             0% { box-shadow: 0 5px 15px rgba(255, 102, 0, 0.5); }
             50% { box-shadow: 0 5px 25px rgba(255, 102, 0, 0.9); }
             100% { box-shadow: 0 5px 15px rgba(255, 102, 0, 0.5); }
         }
-        #startBtn {
-            animation: glow 2s infinite alternate;
-        }
 
-        /* Video Container */
-        #videoContainer {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: black;
-        }
-
-        /* Fullscreen Video */
+        /* Hide Video Tag Initially */
         video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            display: none;
         }
     </style>
 </head>
@@ -77,22 +59,32 @@
 
     <button id="startBtn">Let's Start</button>
 
-    <div id="videoContainer">
-        <video id="video" controls autoplay>
-            <source src="y2mate.com - GLOW VIDEO viral freefire trending alightmotion edit_720pFH (online-video-cutter.com) (1) (1).mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </div>
+    <video id="video" controls autoplay>
+        <source src="y2mate.com - GLOW VIDEO viral freefire trending alightmotion edit_720pFH.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
 
     <script>
         document.getElementById("startBtn").addEventListener("click", function() {
-            this.style.display = "none"; 
-            let videoContainer = document.getElementById("videoContainer");
             let video = document.getElementById("video");
-
-            videoContainer.style.display = "block"; 
-            video.requestFullscreen();
+            this.style.display = "none"; // Hide button
+            video.style.display = "block"; // Show video
+            video.requestFullscreen().catch(err => console.log(err)); // Go Fullscreen
             video.play();
+        });
+
+        // Redirect to Dashboard.html after video ends
+        document.getElementById("video").addEventListener("ended", function() {
+            window.location.href = "Dashboard.html";
+        });
+
+        // Hide video when user exits fullscreen
+        document.addEventListener("fullscreenchange", function() {
+            let video = document.getElementById("video");
+            if (!document.fullscreenElement) {
+                video.style.display = "none"; // Hide video
+                document.getElementById("startBtn").style.display = "block"; // Show button again
+            }
         });
     </script>
 
